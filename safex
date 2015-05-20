@@ -1,0 +1,10 @@
+#!/bin/bash
+
+KLM_IS_LOADED=`cat /sys/devices/bone_capemgr.9/slots | grep AK-GPIO-Test`
+if [ -z "${KLM_IS_LOADED}" ]; then
+   /home/ubuntu/prj/safex-py/safex/safex/devtree/setdt
+fi
+
+cd /home/ubuntu/prj/safex-py/safex/safex/src/main
+sudo python main.py $@ 
+#> ../../logs/safex.last
