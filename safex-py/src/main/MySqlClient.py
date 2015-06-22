@@ -111,6 +111,7 @@ def push():
   query = 'INSERT INTO initialize VALUES(NULL, NOW(),%r,%r,%r,%r,%r,%r,%r,%r,%r,%r);'\
     % (data.mSens1,data.mSens2,data.mSens3,data.mEmail,data.mShutdown,data.mStop,data.mValveH,data.mValveN,data.mSaveH,data.eStop);
   cur.execute(query);
+  data.db.commit();
   return 0;
 
 def getData_H1():
@@ -125,6 +126,7 @@ def addData_H1(_value,_temperature):
   cur = data.db.cursor();
   query = 'INSERT INTO H_1 VALUES(NULL, NOW(), %d, %d);' % (_value, _temperature);
   cur.execute(query);
+  data.db.commit();
   return 0;
 
 def getData_H2():
@@ -139,6 +141,7 @@ def addData_H2(_value):
   cur = data.db.cursor();
   query = 'INSERT INTO H_2 VALUES(NULL, NOW(), %d);' % (_value);
   cur.execute(query);
+  data.db.commit();
   return 0;
 
 def replaceData_H3(_value):
@@ -146,6 +149,8 @@ def replaceData_H3(_value):
   cur = data.db.cursor();
   cur.execute('DELETE * FROM H_3 VALUES;');
   query = 'INSERT INTO H_3 VALUES(NULL, NOW(), %d)' % (_value);
+  cur.execute(query);
+  data.db.commit();
   return 0;
 
 def setEStop(_value):
